@@ -44,3 +44,33 @@ else {
     print("\(nameInferred) at regular price: \(priceInferred)!")
 }
 
+//
+// Classes and Methods
+
+class TipCalcuator {    // Subclassing: Foo: SuperBar, SuperFooBar, ...
+    
+    let total: Double
+    let taxPct: Double
+    let subtotal: Double // all properties need initial value here or init method, otherwise: Error!
+    
+    // here comes the initializer - you can have 1+ but different signature
+    init(total: Double, taxPct: Double) {
+        self.total = total
+        self.taxPct = taxPct
+        subtotal = total / (taxPct + 1)
+    }
+    
+    func calcTipWithTipPct(tipPct: Double) -> Double { // -> Double indicates what is returned
+        return subtotal * tipPct
+    }
+    
+    func printPossibleTips() {
+        print("15%: \(calcTipWithTipPct(0.15))")
+        print("18%: \(calcTipWithTipPct(0.18))")
+        print("20%: \(calcTipWithTipPct(0.20))")    // when call method, first parameter can be unnamed, 2nd+ have to be named
+    }
+    
+}
+
+let tipCalc = TipCalcuator(total: 33.25, taxPct: 0.06)
+tipCalc.printPossibleTips()
